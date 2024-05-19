@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1o7lh83ri8xs"]
+
+[ext_resource type="Script" path="res://scripts/level_killbox.gd" id="1_mrnsj"]
+
+[node name="LevelKillbox" type="Area2D"]
+script = ExtResource("1_mrnsj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

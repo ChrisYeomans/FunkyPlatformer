@@ -1,0 +1,107 @@
+[gd_scene load_steps=15 format=3 uid="uid://wj73jrbfedtt"]
+
+[ext_resource type="Texture2D" uid="uid://c2gdlo7nny15p" path="res://assets/blob_monster.png" id="1_klee2"]
+[ext_resource type="Script" path="res://scripts/blob_monster.gd" id="1_xyc6j"]
+[ext_resource type="Script" path="res://scripts/Killbox.gd" id="3_3mqhm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axutg"]
+atlas = ExtResource("1_klee2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v66gj"]
+atlas = ExtResource("1_klee2")
+region = Rect2(34, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqxhl"]
+atlas = ExtResource("1_klee2")
+region = Rect2(68, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5iv5"]
+atlas = ExtResource("1_klee2")
+region = Rect2(102, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyonw"]
+atlas = ExtResource("1_klee2")
+region = Rect2(136, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vmt4"]
+atlas = ExtResource("1_klee2")
+region = Rect2(170, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sllp4"]
+atlas = ExtResource("1_klee2")
+region = Rect2(204, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e626"]
+atlas = ExtResource("1_klee2")
+region = Rect2(238, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_54u77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axutg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v66gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqxhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5iv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyonw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vmt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sllp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e626")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jb18n"]
+radius = 6.08276
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebysc"]
+radius = 9.0
+
+[node name="blob_monster" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_xyc6j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_54u77")
+animation = &"idle"
+frame_progress = 0.979631
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_jb18n")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(18, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-1, 7)
+target_position = Vector2(-17, 0)
+
+[node name="Killbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("3_3mqhm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killbox"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ebysc")
+
+[connection signal="body_entered" from="Killbox" to="Killbox" method="_on_body_entered"]
