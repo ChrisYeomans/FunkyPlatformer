@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0q4lv24cy8cf"
-path="res://.godot/imported/platformer_tilesheet.png-0775a9fa38427766ccde47bfab84051e.ctex"
+uid="uid://cwjqy3kr33x6w"
+path="res://.godot/imported/log_bridge_tileset.png-b322f44fa96ffb78d6f56a57c4b264ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/platformer_tilesheet.png"
-dest_files=["res://.godot/imported/platformer_tilesheet.png-0775a9fa38427766ccde47bfab84051e.ctex"]
+source_file="res://assets/log_bridge_tileset.png"
+dest_files=["res://.godot/imported/log_bridge_tileset.png-b322f44fa96ffb78d6f56a57c4b264ef.ctex"]
 
 [params]
 

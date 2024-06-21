@@ -69,7 +69,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb18n"]
-radius = 6.08276
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebysc"]
 radius = 9.0
@@ -84,7 +84,7 @@ animation = &"idle"
 frame_progress = 0.979631
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 9.999)
 shape = SubResource("CircleShape2D_jb18n")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
@@ -101,7 +101,7 @@ collision_mask = 3
 script = ExtResource("3_3mqhm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killbox"]
-position = Vector2(0, 8)
+position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_ebysc")
 
 [connection signal="body_entered" from="Killbox" to="Killbox" method="_on_body_entered"]

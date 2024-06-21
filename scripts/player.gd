@@ -1,41 +1,37 @@
 extends CharacterBody2D
+class_name Player
 
-
-@export var SPEED = 300.0
 @export var start_position_node: Node2D
-const JUMP_VELOCITY = -400.0
+@export var spell_controller: PackedScene
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var spell_origin = $SpellOrigin
+@onready var player_movement = $PlayerMovement
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var last_pressed_direction: int = 1
 
 func _ready():
-	$AnimatedSprite2D.play("idle")
+	pass
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	pass
 	
-	if direction == -1:
-		$AnimatedSprite2D.play("left")
-	if direction == 1:
-		$AnimatedSprite2D.play("right")
-	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_left"):
+		last_pressed_direction = -1
+	elif Input.is_action_just_pressed("ui_right"):
+		last_pressed_direction = 1
 		
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if Input.is_action_pressed("attack"):
+		animated_sprite.play("basic_attack")
+	
+	if Input.is_action_just_pressed("fire_spell"):
+		fire_spell()
 
-	move_and_slide()
+func fire_spell():
+	var p = spell_controller.instantiate() as SpellController
+	p.initialize(last_pressed_direction)
+	owner.add_child(p)
+	p.transform = spell_origin.global_transform
 	
 func reset_player_to_start():
 	position.x = start_position_node.position.x
@@ -48,3 +44,6 @@ func kill_player():
 func player_win():
 	print("Player Wins")
 	reset_player_to_start()
+
+
+
